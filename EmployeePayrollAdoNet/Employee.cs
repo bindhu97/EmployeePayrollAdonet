@@ -1,4 +1,5 @@
 ﻿using EmployeePayrollAdoNet;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -90,7 +91,31 @@ namespace EmployeeAdoNet
             {
                 sqlconnection.Close();
             }
+        }
+        public int UpdateEmployeeDetailsWithStoredProcedure()
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("spUpdateEmployeeDetails", this.sqlconnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
 
+                sqlCommand.Parameters.AddWithValue("@Name", "Richu");
+
+                sqlCommand.Parameters.AddWithValue("@Salary", "3000000");
+
+                sqlconnection.Open();
+                int effectedRows = sqlCommand.ExecuteNonQuery();
+
+                return effectedRows;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
         }
 
         public void DeleteEmployeeDetails()
