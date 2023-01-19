@@ -27,6 +27,8 @@ namespace EmployeePayrollAdoNet
             employeeModel.PhoneNumber = "786754344325";
 
             employee.UpdateEmployee();
+
+            employee.UpdateEmployeeDetailsWithStoredProcedure();
         }
     }
 }
