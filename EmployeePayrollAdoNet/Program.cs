@@ -29,6 +29,8 @@ namespace EmployeePayrollAdoNet
             employee.UpdateEmployee();
 
             employee.UpdateEmployeeDetailsWithStoredProcedure();
+
+            employee.UpdateEmployeeDetails();
         }
     }
 }

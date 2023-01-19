@@ -117,6 +117,37 @@ namespace EmployeeAdoNet
                 sqlconnection.Close();
             }
         }
+        public void UpdateEmployeeDetails()
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("spUpdateEmployeeDetails", this.sqlconnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                Console.Write("Give Name Of Employee You Want to Update Salary: ");
+                string name = Console.ReadLine();
+                sqlCommand.Parameters.AddWithValue("@Name", name);
+                Console.Write("Give New Salary: ");
+                int salary = Convert.ToInt32(Console.ReadLine());
+                sqlCommand.Parameters.AddWithValue("@Salary", salary);
+
+                sqlconnection.Open();
+                int effectedRows = sqlCommand.ExecuteNonQuery();
+                if (effectedRows >= 1)
+                {
+                    Console.WriteLine("-----Updated Successfully-----");
+                }
+                else
+                    Console.WriteLine("-----Something Went Wrong-----");
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
+        }
 
         public void DeleteEmployeeDetails()
         {
