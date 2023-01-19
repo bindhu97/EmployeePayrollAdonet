@@ -66,30 +66,59 @@ namespace EmployeeAdoNet
                 throw new Exception(ex.Message);
             }
         }
-        public int UpdateEmployee(EmployeeModel employeeModel)
+        public int UpdateEmployee()
         {
             try
             {
-                using (this.sqlconnection)
-                {
-                    this.sqlconnection.Open();
-                    SqlCommand command1 = new SqlCommand("spUpdateEmployeeInfo", this.sqlconnection);
-                    command1.CommandType = CommandType.StoredProcedure;
-                    command1.Parameters.AddWithValue("@Name", employeeModel.Name);
-                    command1.Parameters.AddWithValue("@Address", employeeModel.Address);
-                    command1.Parameters.AddWithValue("@PhoneNumber", employeeModel.PhoneNumber);
-                    int result = command1.ExecuteNonQuery();
-                    this.sqlconnection.Close();
-                    if (result >= 1)
-                    {
-                        Console.WriteLine("Employee Updated Successfully");
-                    }
-                    return result;
-                }
+                SqlCommand sqlCommand = new SqlCommand("Update Employee Set Salary = @Salary Where Name = @Name", this.sqlconnection);
+                sqlCommand.CommandType = CommandType.Text;
+
+                sqlCommand.Parameters.AddWithValue("@Name", "Richu");
+
+                sqlCommand.Parameters.AddWithValue("@Salary", "3000000");
+
+                sqlconnection.Open();
+                int effectedRows = sqlCommand.ExecuteNonQuery();
+
+                return effectedRows;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw new Exception(ex.Message);
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlconnection.Close();
+            }
+
+        }
+
+        public void DeleteEmployeeDetails()
+        {
+            try
+            {
+                SqlCommand sqlCommand = new SqlCommand("spDeleteEmployeeDetails", this.sqlconnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                Console.Write("Give EmpId To Delete: ");
+                int empId = Convert.ToInt32(Console.ReadLine());
+                sqlCommand.Parameters.AddWithValue("@EmpId", empId);
+
+                sqlconnection.Open();
+                int effectedRows = sqlCommand.ExecuteNonQuery();
+                if (effectedRows >= 1)
+                {
+                    Console.WriteLine("-----Deleted Successfully-----");
+                }
+                else
+                    Console.WriteLine("-----Something Went Wrong-----");
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                sqlconnection.Close();
             }
         }
     }
