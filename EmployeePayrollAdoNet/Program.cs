@@ -31,6 +31,12 @@ namespace EmployeePayrollAdoNet
             employee.UpdateEmployeeDetailsWithStoredProcedure();
 
             employee.UpdateEmployeeDetails();
+
+            employee.RetrieveEmployeeDetailsBetweenDateRange();
+
+            employee.DisplayDetails();
+
+            employee.AggregateFunctions();
         }
     }
 }
