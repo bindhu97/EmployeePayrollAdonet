@@ -26,8 +26,7 @@ namespace EmployeePayrollAdoNet
             employeeModel.Address = "Chikpete";
             employeeModel.PhoneNumber = "786754344325";
 
-            employee.UpdateEmployee(employeeModel);
-            employeeModel.Name = "Bindhu";
+            employee.UpdateEmployee();
         }
     }
 }
