@@ -66,5 +66,31 @@ namespace EmployeeAdoNet
                 throw new Exception(ex.Message);
             }
         }
+        public int UpdateEmployee(EmployeeModel employeeModel)
+        {
+            try
+            {
+                using (this.sqlconnection)
+                {
+                    this.sqlconnection.Open();
+                    SqlCommand command1 = new SqlCommand("spUpdateEmployeeInfo", this.sqlconnection);
+                    command1.CommandType = CommandType.StoredProcedure;
+                    command1.Parameters.AddWithValue("@Name", employeeModel.Name);
+                    command1.Parameters.AddWithValue("@Address", employeeModel.Address);
+                    command1.Parameters.AddWithValue("@PhoneNumber", employeeModel.PhoneNumber);
+                    int result = command1.ExecuteNonQuery();
+                    this.sqlconnection.Close();
+                    if (result >= 1)
+                    {
+                        Console.WriteLine("Employee Updated Successfully");
+                    }
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
