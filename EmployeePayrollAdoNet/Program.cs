@@ -1,9 +1,4 @@
 ﻿using EmployeeAdoNet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EmployeePayrollAdoNet
 {
@@ -11,19 +6,25 @@ namespace EmployeePayrollAdoNet
     {
         public static void Main(string[] args)
         {
-            bool check = true;
-            while (check)
-            {
-                Console.WriteLine("Welcome to AdoDotNet Database Program");
-                Console.WriteLine("1) Create Database\n");
-                int result = (int)Convert.ToInt64(Console.ReadLine());
-                switch (result)
-                {
-                    case 1:
-                        Employee.EmpDatabase();
-                        break;
-                }
-            }
+            Employee employee = new Employee();
+            Employee.EmpDatabase();
+            EmployeeModel employeeModel = new EmployeeModel();
+            employeeModel.Name = "Bindhu";
+            employeeModel.Salary = 23000;
+            employeeModel.Gender = 'F';
+            employeeModel.Address = "Dasanpura";
+            employeeModel.PhoneNumber = "5977665422";
+            employeeModel.Department = "Sales";
+            employeeModel.BasicPay = 150000;
+            employeeModel.Deductions = 1000;
+            employeeModel.TaxablePay = 1000;
+            employeeModel.IncomeTax = 1000;
+            employeeModel.NetPay = 12000;
+
+            employee.AddEmployee(employeeModel);
+            employeeModel.Name = "Bindhu";
+            employeeModel.Address = "Chikpete";
+            employeeModel.PhoneNumber = "786754344325";
         }
     }
 }
